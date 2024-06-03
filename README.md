@@ -1,40 +1,93 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Album assessment
 
-## Getting Started
+This project is a web application that allows users to browse and interact with a collection of albums and photos. It leverages Next.js for server-side rendering and API routes, and MongoDB for data persistence. Users can view user profiles, browse albums, and view photos within each album.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Routes](#api-routes)
+- [Custom Hooks](#custom-hooks)
+- [Testing](#testing)
+<!-- - [Contributing](#contributing)
+- [License](#license) -->
+
+## Installation
+
+1.  Clone the repository:
+
+    `git clone https://github.com/jkitsao/assessment.git`
+
+2.  Navigate to the project directory:
+
+    `cd assessment`
+
+3.  Install dependencies:
+
+    `Yarn `
+
+# API Routes Documentation
+
+One of the key features of Next.js is its built-in API routes, which allow us to create serverless functions to handle backend logic. These API routes serve as endpoints for our application, enabling us to perform operations such as fetching data from a database, processing form submissions, or integrating with third-party services.
+
+## Users API
+
+- **GET /api/users**: Retrieve all users.
+- **GET /api/users/:userId**: Retrieve a specific user by ID.
+
+## Albums API
+
+- **GET /api/albums**: Retrieve all albums.
+- **GET /api/albums/:userId**: Retrieve albums by user ID.
+
+## Photos API
+
+- **GET /api/albums/info/:albumId**: Retrieve album information by album ID.
+- **GET /api/photos/album-photo**: Retrieve photos by album ID.
+
+## Custom Hooks
+
+Hooks are used in this project to abstract away the implementation details of data fetching and state management, making our code more modular, reusable, and easier to understand.
+
+### useUser(userId)
+
+A custom hook to fetch user details by ID.
+
+```jsx
+import { useUser } from "./hooks/useUser";
+
+const { user, loading, error } = useUser(userId);
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### useAlbumPhotos(albumId)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+A custom hook to fetch photos of a specific album.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+```jsx
+import { useAlbumPhotos } from "./hooks/useAlbumPhotos";
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+const { album, loading, error } = useAlbumPhotos(albumId);
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### usePhotos()
 
-## Learn More
+A custom hook to fetch all photos.
 
-To learn more about Next.js, take a look at the following resources:
+```jsx
+import { usePhotos } from "./hooks/usePhotos";
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+const { photos, loading, error } = usePhotos();
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Test: HomePage Component
 
-## Deploy on Vercel
+This test suite verifies the behavior of the `Home Page` component, ensuring that it behaves correctly under different authentication statuses.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The `next-auth/react` module is mocked to simulate different authentication statuses using the useSession hook.
+The `next/router`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Running Tests
+
+Run Jest tests using the following command:
+
+`yarn test`
