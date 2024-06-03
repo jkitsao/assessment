@@ -1,5 +1,5 @@
-import connectToDatabase from "../../utils/mongoose";
-import Album from "../../models/Album";
+import connectToDatabase from "../../../utils/mongoose";
+import Photo from "../../../models/Photo";
 
 export default async function handler(req, res) {
   await connectToDatabase();
@@ -8,16 +8,16 @@ export default async function handler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const albums = await Album.find({}).populate("userId");
-        res.status(200).json({ success: true, data: albums });
+        const photos = await Photo.find({}); //.populate("albumId");
+        res.status(200).json({ success: true, data: photos });
       } catch (error) {
-        res.status(400).json({ success: false });
+        res.status(400).json({ success: false, message: error.message });
       }
       break;
     case "POST":
       try {
-        const album = await Album.create(req.body);
-        res.status(201).json({ success: true, data: album });
+        const photo = await Photo.create(req.body);
+        res.status(201).json({ success: true, data: photo });
       } catch (error) {
         res.status(400).json({ success: false, message: error.message });
       }
