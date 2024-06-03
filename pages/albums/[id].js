@@ -3,7 +3,7 @@ import { useAlbumPhotos, usePhotos } from "../../hooks/useFetch";
 import Navbar from "@/components/navigation";
 import { useSession } from "next-auth/react";
 import Loader from "@/components/loader";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function AlbumPage() {
   const [refresh, setRefresh] = useState(false);
@@ -78,48 +78,50 @@ export default function AlbumPage() {
         )}
         <div className="flex max-w-[35rem] mx-auto justify-center h-full w-full">
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
-            {photos.map((photo) => (
-              <li
-                key={photo._id}
-                className="bg-neutral-700 rounded-md overflow-hidden shadow-lg"
-              >
-                <img
-                  src={photo.imageUrl}
-                  alt={photo.title}
-                  className="w-full object-cover"
-                />
-                <div className="p-4">
-                  {editingPhotoId === photo._id ? (
-                    <div className="flex items-center">
-                      <input
-                        type="text"
-                        value={newTitle}
-                        onChange={(e) => setNewTitle(e.target.value)}
-                        className="text-lg font-semibold text-gray-800 bg-gray-200 rounded-md px-2 py-1 mr-2"
-                      />
-                      <button
-                        onClick={() => handleSave(photo._id)}
-                        className="bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 transition duration-300"
-                      >
-                        Save
-                      </button>
+            {photos?.length
+              ? photos.map((photo) => (
+                  <li
+                    key={photo?._id}
+                    className="bg-neutral-700 rounded-md overflow-hidden shadow-lg"
+                  >
+                    <img
+                      src={photo.imageUrl}
+                      alt={photo.title}
+                      className="w-full object-cover"
+                    />
+                    <div className="p-4">
+                      {editingPhotoId === photo?._id ? (
+                        <div className="flex items-center">
+                          <input
+                            type="text"
+                            value={newTitle}
+                            onChange={(e) => setNewTitle(e.target.value)}
+                            className="text-lg font-semibold text-gray-800 bg-gray-200 rounded-md px-2 py-1 mr-2"
+                          />
+                          <button
+                            onClick={() => handleSave(photo?._id)}
+                            className="bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 transition duration-300"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between">
+                          <p className="text-lg font-semibold text-gray-200 truncate">
+                            {photo?.title}
+                          </p>
+                          <button
+                            onClick={() => handleEdit(photo)}
+                            className="text-blue-400 hover:text-blue-200 transition duration-300"
+                          >
+                            Edit
+                          </button>
+                        </div>
+                      )}
                     </div>
-                  ) : (
-                    <div className="flex items-center justify-between">
-                      <p className="text-lg font-semibold text-gray-200 truncate">
-                        {photo.title}
-                      </p>
-                      <button
-                        onClick={() => handleEdit(photo)}
-                        className="text-blue-400 hover:text-blue-200 transition duration-300"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </li>
-            ))}
+                  </li>
+                ))
+              : null}
           </ul>
         </div>
       </div>

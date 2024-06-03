@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-// Hook to fetch all users
+//  fetch all users
 export function useUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,7 +49,7 @@ export function useAlbums() {
   return { albums, loading, error };
 }
 
-// Hook to fetch user details by ID
+// fetch user details by ID
 export function useUser(userId) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -75,7 +75,7 @@ export function useUser(userId) {
   return { user, loading, error };
 }
 
-// Hook to fetch albums by user ID
+// fetch albums by user ID
 export function useUserAlbums(userId) {
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -102,7 +102,7 @@ export function useUserAlbums(userId) {
   return { albums, loading, error };
 }
 
-// Hook to fetch photos by album ID
+//  fetch photos by album ID
 export function useAlbumPhotos(albumId) {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);

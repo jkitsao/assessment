@@ -1,6 +1,6 @@
 # Album assessment
 
-This project is a web application that allows users to browse and interact with a collection of albums and photos. It leverages Next.js for server-side rendering and API routes, and MongoDB for data persistence. Users can view user profiles, browse albums, and view photos within each album.
+Web application that allows users to browse and interact with a collection of albums and photos. I leveraged Next.js for server-side rendering and API routes, and MongoDB for data persistence. Users can view user profiles, browse albums, and view photos within each album.
 
 ## Table of Contents
 
@@ -24,11 +24,11 @@ This project is a web application that allows users to browse and interact with 
 
 3.  Install dependencies:
 
-    `Yarn `
+    `yarn `
 
 # API Routes Documentation
 
-One of the key features of Next.js is its built-in API routes, which allow us to create serverless functions to handle backend logic. These API routes serve as endpoints for our application, enabling us to perform operations such as fetching data from a database, processing form submissions, or integrating with third-party services.
+Next.js has built-in API routes, which allowed me to create serverless functions to handle backend logic. These API routes serve as endpoints for the application, enabling me to perform operations such as fetching data from a database, processing form submissions, or integrating with third-party services.
 
 ## Users API
 
@@ -47,14 +47,14 @@ One of the key features of Next.js is its built-in API routes, which allow us to
 
 ## Custom Hooks
 
-Hooks are used in this project to abstract away the implementation details of data fetching and state management, making our code more modular, reusable, and easier to understand.
+I used A Custom Hook to abstract away the implementation details of data fetching and state management, making our code more modular, reusable, and easier to understand.
 
 ### useUser(userId)
 
 A custom hook to fetch user details by ID.
 
 ```jsx
-import { useUser } from "./hooks/useUser";
+import { useUser } from "./hooks/useFetch";
 
 const { user, loading, error } = useUser(userId);
 ```
@@ -64,7 +64,7 @@ const { user, loading, error } = useUser(userId);
 A custom hook to fetch photos of a specific album.
 
 ```jsx
-import { useAlbumPhotos } from "./hooks/useAlbumPhotos";
+import { useAlbumPhotos } from "./hooks/useFetch";
 
 const { album, loading, error } = useAlbumPhotos(albumId);
 ```
@@ -74,14 +74,14 @@ const { album, loading, error } = useAlbumPhotos(albumId);
 A custom hook to fetch all photos.
 
 ```jsx
-import { usePhotos } from "./hooks/usePhotos";
+import { usePhotos } from "./hooks/useFetch";
 
 const { photos, loading, error } = usePhotos();
 ```
 
 ## Test: HomePage Component
 
-This test suite verifies the behavior of the `Home Page` component, ensuring that it behaves correctly under different authentication statuses.
+This test suite verifies the behavior of the `Home Page`, ensuring that it behaves correctly under different authentication statuses.
 
 The `next-auth/react` module is mocked to simulate different authentication statuses using the useSession hook.
 The `next/router`
