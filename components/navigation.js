@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <nav className="bg-neutral-900 sticky top-0 p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-purple-200 text-2xl font-extrabold">
+        <div className="text-blue-400 text-2xl font-extrabold">
           <Link href="/">
             <span className="hover:text-gray-300 transition duration-300">
               Albums.io
