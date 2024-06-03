@@ -9,14 +9,18 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-blue-400 text-2xl font-extrabold">
           <Link href="/">
-            <span className="hover:text-gray-300 transition duration-300">
+            {/* <span className="hover:text-gray-300 transition duration-300">
               Albums.io
-            </span>
+            </span> */}
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/1375/1375106.png"
+              className="h-8 "
+            />
           </Link>
         </div>
         <div className="flex items-center space-x-6">
           <Link href="/home">
-            <span className="text-white hover:text-gray-300 transition duration-300">
+            <span className="text-white text-sm lg:text-base hover:text-gray-300 transition duration-300">
               Home
             </span>
           </Link>
@@ -24,7 +28,7 @@ export default function Navbar() {
             <div className="text-white">Loading...</div>
           ) : session ? (
             <div className="flex items-center space-x-4">
-              <span className="text-white font-semibold">
+              <span className="text-white text-sm lg:text-base font-semibold">
                 {session.user.name}
               </span>
               <button
@@ -47,3 +51,4 @@ export default function Navbar() {
     </nav>
   );
 }
+Navbar.displayName = "Navbar";
