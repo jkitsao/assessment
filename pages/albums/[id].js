@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import { useAlbumPhotos, usePhotos } from "../../hooks/useFetch";
 import Navbar from "@/components/navigation";
+import { useSession } from "next-auth/react";
 import Loader from "@/components/loader";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 export default function AlbumPage() {
   const [refresh, setRefresh] = useState(false);
@@ -10,11 +11,16 @@ export default function AlbumPage() {
   const { id } = router.query;
   const { album, loading, error } = useAlbumPhotos(id);
   const { photos } = usePhotos(album?._id, refresh, setRefresh);
-
+  const { data: session, status } = useSession();
   const [editingPhotoId, setEditingPhotoId] = useState(null);
   const [newTitle, setNewTitle] = useState("");
   const [notification, setNotification] = useState("");
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/api/auth/signin");
+    }
+  }, [status, router]);
   const handleEdit = (photo) => {
     setEditingPhotoId(photo._id);
     setNewTitle(photo.title);

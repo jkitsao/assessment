@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { useUser, useUserAlbums } from "../../hooks/useFetch";
 import Navbar from "@/components/navigation";
 import Loader from "@/components/loader";
@@ -7,7 +9,14 @@ import Loader from "@/components/loader";
 export default function UserPage() {
   const router = useRouter();
   const { id } = router.query;
+  const { data: session, status } = useSession();
   const { user, loading: userLoading, error: userError } = useUser(id);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/api/auth/signin");
+    }
+  }, [status, router]);
   const {
     albums,
     loading: albumsLoading,
